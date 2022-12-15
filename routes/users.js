@@ -15,18 +15,19 @@ router.route("/:id").get(async (req, res) => {
 });
 
 // get all shows watched by user
-router.route("/:id/shows").get(async (req, res) => {
+
+router.get("/:id/shows", async (req, res) => {
   const user = await User.findByPk(req.params.id);
   const getShowsWatched = await user.getShows();
   res.json(getShowsWatched);
 });
 
 // put updated and add sho if user has watched it
-router.route("/:id/shows/:showsId").put(async (req, res) => {
+router.put("/:id/shows/:showsId", async (req, res) => {
   const user = await User.findByPk(req.params.id);
   const getShow = await Show.findByPk(req.params.showsId);
-  await user.addShows(getShow);
-  const getShowsWatched = await user.getShows();
+  await user.addShow(getShow);
+  const getShowsWatched = await user.getShow();
   res.send(getShowsWatched);
 });
 

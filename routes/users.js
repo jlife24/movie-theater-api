@@ -27,8 +27,7 @@ router.put("/:id/shows/:showsId", async (req, res) => {
   const user = await User.findByPk(req.params.id);
   const getShow = await Show.findByPk(req.params.showsId);
   await user.addShow(getShow);
-  const getShowsWatched = await user.getShow();
-  res.send(getShowsWatched);
+  res.json(await Show.findByPk(req.params.showsId));
 });
 
 module.exports = router;

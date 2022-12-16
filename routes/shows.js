@@ -43,8 +43,8 @@ router.put("/:id/:status", async (req, res) => {
 
 //delete a show
 router.delete("/:id", async (req, res) => {
-  const deletedShow = await Show.destroy({ where: { id: req.params.id } });
-  const showsdeleted = await deletedShow.findAll();
-  res.send(showsdeleted);
+  await Show.destroy({ where: { id: req.params.id } });
+  const showsdeleted = await Show.findAll();
+  res.json(showsdeleted);
 });
 module.exports = router;
